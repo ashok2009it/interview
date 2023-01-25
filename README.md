@@ -9,6 +9,7 @@ Express
 Sequilize ORM (Object-relational mapping) 
 Mysql
 
+```
 ## Create .env File in root directory "interview"
 
 ```
