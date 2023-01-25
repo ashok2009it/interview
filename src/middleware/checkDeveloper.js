@@ -34,7 +34,7 @@ const checkAdmin = (req, res, next) => {
                 msg: 'User Email not verified',
             })
         }
-        if (!user.roles.includes(4)) {
+        if (!user.roles.includes(1)) {
             return res.status(401).json({
                 success: false,
                 user,

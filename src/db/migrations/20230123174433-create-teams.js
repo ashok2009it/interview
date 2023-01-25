@@ -16,9 +16,9 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      is_team_lead: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,

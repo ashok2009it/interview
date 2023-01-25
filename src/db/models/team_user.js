@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Team_User.init({
     team_id: DataTypes.INTEGER,
-    user_id: DataTypes.INTEGER
+    user_id: DataTypes.INTEGER,
+    is_team_lead: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Team_User',

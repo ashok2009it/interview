@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Teams.belongsToMany(models.User, {
         through: "Team_User",
         as: "users",
-        foreignKey: "user_id",
+        foreignKey: "team_id",
       });
     }
   }
@@ -22,9 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    name: DataTypes.STRING,
+    name: DataTypes.STRING
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Teams',
   });
   return Teams;

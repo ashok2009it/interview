@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
+const fs = require("fs");
+const path = require("path");
+const Sequelize = require("sequelize");
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../../config/database.js')[env];
+const env = process.env.NODE_ENV || "development";
+const config = require(__dirname + "/../../config/database.js")[env];
 const db = {};
 
 let sequelize;
@@ -22,23 +22,25 @@ let sequelize;
   console.log(process.env.USING_DOCKER);
   sequelize = new Sequelize(config.database, config.username, config.password, {
     ...config,
-     host: Number(process.env.USING_DOCKER) ? 'host.docker.internal' : config.host,
+    host: Number(process.env.USING_DOCKER)
+      ? "host.docker.internal"
+      : config.host,
   });
-// }
+}
 
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.');
+    console.log("Connection has been established successfully.");
   })
   .catch((err) => {
-    console.error('Unable to connect to the database:', err);
+    console.error("Unable to connect to the database:", err);
   });
 
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (
-      file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
+      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
     );
   })
   .forEach((file) => {

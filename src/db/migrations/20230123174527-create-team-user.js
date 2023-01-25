@@ -28,6 +28,10 @@ module.exports = {
           key: 'id'
         },
       },
+      is_team_lead: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

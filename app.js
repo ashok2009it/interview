@@ -9,8 +9,7 @@ var cors = require('cors');
 var indexRouter = require('./src/routes/index');
 var authRouter = require('./src/routes/api/auth');
 var usersRouter = require('./src/routes/api/users');
-var ceremonyRouter = require('./src/routes/api/ceremony');
-var questionRouter = require('./src/routes/api/questions');
+var teamsRouter = require('./src/routes/api/teams');
 
 var app = express();
 var corsOptions = {
@@ -33,8 +32,7 @@ app.use('/', indexRouter);
 app.use('/api', indexRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/ceremony', ceremonyRouter);
-app.use('/api/questions', questionRouter);
+app.use('/api/teams', teamsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

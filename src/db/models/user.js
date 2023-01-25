@@ -18,6 +18,12 @@ module.exports = (sequelize, DataTypes) => {
         as: 'tokens',
         foreignKey: 'user_id',
       });
+
+      User.belongsToMany(models.Teams, {
+        through: 'Team_User',
+        as: 'teams',
+        foreignKey: 'user_id',
+      });
     }
   }
   User.init(

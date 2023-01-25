@@ -46,7 +46,6 @@ router.post(
       });
     } else {
       try {
-        
         let user = await User.create({
           full_name: req.body.full_name,
           email: req.body.email,
@@ -75,6 +74,18 @@ router.post(
           updatedAt: curDate,
         }).then((user_token) => {
           //
+        });
+
+        await Roles.findAll({
+          where: {
+            id: req.body.roles,
+          },
+        }).then(async (roles) => {
+          if (roles) {
+            await roles.forEach(async (role) => {
+              await user.addRoles(role);
+            });
+          }
         });
 
         res.json({
