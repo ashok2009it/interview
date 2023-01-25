@@ -1,0 +1,579 @@
+{
+	"info": {
+		"_postman_id": "eadf216c-8033-4969-ba89-2b75ae343713",
+		"name": "Interview",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2442537"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonResponse = pm.response.json();",
+									"pm.expect(jsonResponse.token).not.eql(null);",
+									"if (jsonResponse.token) {",
+									"    pm.environment.set(\"auth_token\", jsonResponse.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"full_name\": \"Ashok\",\n    \"email\": \"ashok2009it3@gmail.com\",\n    \"password\": \"Password@1\",\n    \"roles\": [1]\n}"
+						},
+						"url": {
+							"raw": "{{api_url}}auth/signup",
+							"host": [
+								"{{api_url}}auth"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonResponse = pm.response.json();",
+									"pm.expect(jsonResponse.token).not.eql(null);",
+									"if (jsonResponse.token) {",
+									"    pm.environment.set(\"auth_token\", jsonResponse.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ashok2009it@gmail.com\",\n    \"password\": \"Password@1\"\n}"
+						},
+						"url": {
+							"raw": "{{api_url}}auth/signin",
+							"host": [
+								"{{api_url}}auth"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Me",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzUsImZpcnN0X25hbWUiOiJKb2huIiwibGFzdF9uYW1lIjoiVmFkb3IiLCJlbWFpbCI6InZhZG9yM2hzZHNhOUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQ3dWFINHM5WWtBU0RCSmltT1M5ZUtlNzdpUkk2eVliVmwuZ0ZJT2hGWDBkS0RqV0trUlhabSIsImFjdGl2ZSI6ZmFsc2UsInVwZGF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImNyZWF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImlhdCI6MTY1Nzg5NjU0MiwiZXhwIjoxNjYwNDg4NTQyfQ.waXyyOo9KVIBbqAzUKY0k1lO3gOCNxjikrLABvpaw0o",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}users/me",
+					"host": [
+						"{{api_url}}users"
+					],
+					"path": [
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Team List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzUsImZpcnN0X25hbWUiOiJKb2huIiwibGFzdF9uYW1lIjoiVmFkb3IiLCJlbWFpbCI6InZhZG9yM2hzZHNhOUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQ3dWFINHM5WWtBU0RCSmltT1M5ZUtlNzdpUkk2eVliVmwuZ0ZJT2hGWDBkS0RqV0trUlhabSIsImFjdGl2ZSI6ZmFsc2UsInVwZGF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImNyZWF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImlhdCI6MTY1Nzg5NjU0MiwiZXhwIjoxNjYwNDg4NTQyfQ.waXyyOo9KVIBbqAzUKY0k1lO3gOCNxjikrLABvpaw0o",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}teams/list",
+					"host": [
+						"{{api_url}}teams"
+					],
+					"path": [
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Team",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzUsImZpcnN0X25hbWUiOiJKb2huIiwibGFzdF9uYW1lIjoiVmFkb3IiLCJlbWFpbCI6InZhZG9yM2hzZHNhOUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQ3dWFINHM5WWtBU0RCSmltT1M5ZUtlNzdpUkk2eVliVmwuZ0ZJT2hGWDBkS0RqV0trUlhabSIsImFjdGl2ZSI6ZmFsc2UsInVwZGF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImNyZWF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImlhdCI6MTY1Nzg5NjU0MiwiZXhwIjoxNjYwNDg4NTQyfQ.waXyyOo9KVIBbqAzUKY0k1lO3gOCNxjikrLABvpaw0o",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}teams/99039286-2d2d-40f2-9cf2-ecc2566ff277",
+					"host": [
+						"{{api_url}}teams"
+					],
+					"path": [
+						"99039286-2d2d-40f2-9cf2-ecc2566ff277"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Team",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonResponse = pm.response.json();",
+							"pm.expect(jsonResponse.token).not.eql(null);",
+							"if (jsonResponse.token) {",
+							"    pm.environment.set(\"auth_token\", jsonResponse.token);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Development Team\",\n    \"is_team_lead\": 1,\n    \"members\": [2]\n}"
+				},
+				"url": {
+					"raw": "{{api_url}}teams/create",
+					"host": [
+						"{{api_url}}teams"
+					],
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Team Member",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonResponse = pm.response.json();",
+							"pm.expect(jsonResponse.token).not.eql(null);",
+							"if (jsonResponse.token) {",
+							"    pm.environment.set(\"auth_token\", jsonResponse.token);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"team_id\": 1,\n    \"user_id\": 1\n}"
+				},
+				"url": {
+					"raw": "{{api_url}}teams/assign-member",
+					"host": [
+						"{{api_url}}teams"
+					],
+					"path": [
+						"assign-member"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make Team Lead",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonResponse = pm.response.json();",
+							"pm.expect(jsonResponse.token).not.eql(null);",
+							"if (jsonResponse.token) {",
+							"    pm.environment.set(\"auth_token\", jsonResponse.token);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"team_id\": 6,\n    \"user_id\": 2,\n    \"is_team_lead\": 1\n}"
+				},
+				"url": {
+					"raw": "{{api_url}}teams/team-lead",
+					"host": [
+						"{{api_url}}teams"
+					],
+					"path": [
+						"team-lead"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Team",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzUsImZpcnN0X25hbWUiOiJKb2huIiwibGFzdF9uYW1lIjoiVmFkb3IiLCJlbWFpbCI6InZhZG9yM2hzZHNhOUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQ3dWFINHM5WWtBU0RCSmltT1M5ZUtlNzdpUkk2eVliVmwuZ0ZJT2hGWDBkS0RqV0trUlhabSIsImFjdGl2ZSI6ZmFsc2UsInVwZGF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImNyZWF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImlhdCI6MTY1Nzg5NjU0MiwiZXhwIjoxNjYwNDg4NTQyfQ.waXyyOo9KVIBbqAzUKY0k1lO3gOCNxjikrLABvpaw0o",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}teams/d8a554dc-caac-46fc-905b-9c6f0f4dd8d8",
+					"host": [
+						"{{api_url}}teams"
+					],
+					"path": [
+						"d8a554dc-caac-46fc-905b-9c6f0f4dd8d8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzUsImZpcnN0X25hbWUiOiJKb2huIiwibGFzdF9uYW1lIjoiVmFkb3IiLCJlbWFpbCI6InZhZG9yM2hzZHNhOUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQ3dWFINHM5WWtBU0RCSmltT1M5ZUtlNzdpUkk2eVliVmwuZ0ZJT2hGWDBkS0RqV0trUlhabSIsImFjdGl2ZSI6ZmFsc2UsInVwZGF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImNyZWF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImlhdCI6MTY1Nzg5NjU0MiwiZXhwIjoxNjYwNDg4NTQyfQ.waXyyOo9KVIBbqAzUKY0k1lO3gOCNxjikrLABvpaw0o",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}users/list",
+					"host": [
+						"{{api_url}}users"
+					],
+					"path": [
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzUsImZpcnN0X25hbWUiOiJKb2huIiwibGFzdF9uYW1lIjoiVmFkb3IiLCJlbWFpbCI6InZhZG9yM2hzZHNhOUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQ3dWFINHM5WWtBU0RCSmltT1M5ZUtlNzdpUkk2eVliVmwuZ0ZJT2hGWDBkS0RqV0trUlhabSIsImFjdGl2ZSI6ZmFsc2UsInVwZGF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImNyZWF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImlhdCI6MTY1Nzg5NjU0MiwiZXhwIjoxNjYwNDg4NTQyfQ.waXyyOo9KVIBbqAzUKY0k1lO3gOCNxjikrLABvpaw0o",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}users/8a67a7dd-5c55-4a2b-87b4-6f95028e27ea",
+					"host": [
+						"{{api_url}}users"
+					],
+					"path": [
+						"8a67a7dd-5c55-4a2b-87b4-6f95028e27ea"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Role to user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonResponse = pm.response.json();",
+							"pm.expect(jsonResponse.token).not.eql(null);",
+							"if (jsonResponse.token) {",
+							"    pm.environment.set(\"auth_token\", jsonResponse.token);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role_id\": 2,\n    \"user_id\": 3\n}"
+				},
+				"url": {
+					"raw": "{{api_url}}users/assign-role",
+					"host": [
+						"{{api_url}}users"
+					],
+					"path": [
+						"assign-role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzUsImZpcnN0X25hbWUiOiJKb2huIiwibGFzdF9uYW1lIjoiVmFkb3IiLCJlbWFpbCI6InZhZG9yM2hzZHNhOUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQ3dWFINHM5WWtBU0RCSmltT1M5ZUtlNzdpUkk2eVliVmwuZ0ZJT2hGWDBkS0RqV0trUlhabSIsImFjdGl2ZSI6ZmFsc2UsInVwZGF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImNyZWF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImlhdCI6MTY1Nzg5NjU0MiwiZXhwIjoxNjYwNDg4NTQyfQ.waXyyOo9KVIBbqAzUKY0k1lO3gOCNxjikrLABvpaw0o",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}users/8a67a7dd-5c55-4a2b-87b4-6f95028e27ea",
+					"host": [
+						"{{api_url}}users"
+					],
+					"path": [
+						"8a67a7dd-5c55-4a2b-87b4-6f95028e27ea"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dashboard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzUsImZpcnN0X25hbWUiOiJKb2huIiwibGFzdF9uYW1lIjoiVmFkb3IiLCJlbWFpbCI6InZhZG9yM2hzZHNhOUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQ3dWFINHM5WWtBU0RCSmltT1M5ZUtlNzdpUkk2eVliVmwuZ0ZJT2hGWDBkS0RqV0trUlhabSIsImFjdGl2ZSI6ZmFsc2UsInVwZGF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImNyZWF0ZWRBdCI6IjIwMjItMDctMTVUMTQ6NDk6MDIuODI1WiIsImlhdCI6MTY1Nzg5NjU0MiwiZXhwIjoxNjYwNDg4NTQyfQ.waXyyOo9KVIBbqAzUKY0k1lO3gOCNxjikrLABvpaw0o",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}users/dashboard",
+					"host": [
+						"{{api_url}}users"
+					],
+					"path": [
+						"dashboard"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
