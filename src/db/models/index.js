@@ -10,16 +10,14 @@ const db = {};
 
 let sequelize;
 
-// if (config.use_env_variable) {
-//   sequelize = new Sequelize(process.env[config.use_env_variable], {
-//     ...config,
-//     host: process.env.USING_DOCKER ? 'host.docker.internal' : config.host,
-//   });
-// } else {
-  console.log(config.database);
-  console.log(config.username);
-  console.log(config.password);
-  console.log(process.env.USING_DOCKER);
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], {
+    ...config,
+    host: Number(process.env.USING_DOCKER)
+      ? "host.docker.internal"
+      : config.host,
+  });
+} else {
   sequelize = new Sequelize(config.database, config.username, config.password, {
     ...config,
     host: Number(process.env.USING_DOCKER)
