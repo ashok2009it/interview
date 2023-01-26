@@ -36,22 +36,13 @@ router.get("/me", checkAuth, async function (req, res) {
 
 router.get("/dashboard", checkAuth, async function (req, res) {
   try {
-    let user = await User.findOne({
-      where: {
-        email: req.user.email,
-      },
-      include: [
-        {
-          model: Roles,
-          as: "roles",
-        },
-      ],
-    });
+    let numUser = await User.count();
+    let numTeam = await Teams.count();
 
     res.json({
       success: true,
       msg: "Success",
-      user: user,
+      data: { users: numUser, teams: numTeam },
     });
   } catch (err) {
     res.status(401).send({

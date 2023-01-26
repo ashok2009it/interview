@@ -10,6 +10,7 @@ var indexRouter = require('./src/routes/index');
 var authRouter = require('./src/routes/api/auth');
 var usersRouter = require('./src/routes/api/users');
 var teamsRouter = require('./src/routes/api/teams');
+var rolesRouter = require('./src/routes/api/roles');
 
 var app = express();
 var corsOptions = {
@@ -33,6 +34,7 @@ app.use('/api', indexRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/teams', teamsRouter);
+app.use('/api/roles', rolesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

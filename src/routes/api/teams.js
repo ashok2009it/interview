@@ -3,6 +3,8 @@ const router = express.Router();
 const checkAuth = require("../../middleware/checkAuth");
 const Teams = require("../../db/models").Teams;
 const User = require("../../db/models").User;
+const Team_User = require("../../db/models").Team_User;
+
 const { body, validationResult } = require("express-validator");
 
 const curDate = new Date().toISOString().replace(/T/, " ").replace(/\..+/, "");
@@ -137,6 +139,69 @@ router.post(
     body("user_id")
       .not()
       .isEmpty()
+      .isArray()
+      .withMessage("Invalid User Id"),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        msg: "Data Validation Failed",
+        errors: errors.array(),
+      });
+    } else {
+      try {
+        let team = await Teams.findOne({
+          where: {
+            id: req.body.team_id,
+          },
+        });
+
+        let userArr = req.body.user_id;
+        var uniqueUsers = userArr.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+
+        uniqueUsers.forEach(async (user_id) => {
+          await User.findOne({
+            where: {
+              id: user_id,
+            },
+          }).then(async (user) => {
+            if (user && team) {
+              await team.addUsers(user);
+            }
+          });
+        });
+
+        res.json({
+          success: true,
+          msg: "Success",
+        });
+      } catch (err) {
+        res.status(401).send({
+          success: false,
+          msg: "Something went wrong" + err,
+        });
+      }
+    }
+  }
+);
+
+//Remove user from a team
+router.post(
+  "/remove-team-member",
+  [
+    body("team_id")
+      .not()
+      .isEmpty()
+      .trim()
+      .isNumeric()
+      .escape()
+      .withMessage("Invalid team Id"),
+
+    body("user_id")
+      .not()
+      .isEmpty()
       .trim()
       .isNumeric()
       .escape()
@@ -164,7 +229,7 @@ router.post(
           },
         }).then(async (user) => {
           if (user && team) {
-            await team.addUsers(user);
+            await team.removeUsers(user);
           }
         });
 
