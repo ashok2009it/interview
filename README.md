@@ -32,12 +32,13 @@ FRONTEND_LINK=http://localhost:3000/
 "database": "interview",
 "host": "localhost",
 "dialect": "mysql"
-```
+
+
 
 
 ## Setup .sequelizerc file inside the project root directory (interview/.sequelizerc) if this file does not exists
-
 ```
+
 const path = require('path');
 module.exports = {
   config: path.resolve('src/config', 'database.js'),
