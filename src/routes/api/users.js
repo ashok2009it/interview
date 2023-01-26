@@ -93,7 +93,7 @@ router.get("/:uuid", checkAuth, async function (req, res) {
       where: {
         uuid: req.params.uuid,
       },
-      includes: [
+      include: [
         {
           model: Roles,
           as: "roles",

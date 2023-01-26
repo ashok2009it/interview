@@ -136,11 +136,7 @@ router.post(
       .escape()
       .withMessage("Invalid team Id"),
 
-    body("user_id")
-      .not()
-      .isEmpty()
-      .isArray()
-      .withMessage("Invalid User Id"),
+    body("user_id").not().isEmpty().isArray().withMessage("Invalid User Id"),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -159,7 +155,9 @@ router.post(
         });
 
         let userArr = req.body.user_id;
-        var uniqueUsers = userArr.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+        var uniqueUsers = userArr.filter(function (item, i, ar) {
+          return ar.indexOf(item) === i;
+        });
 
         uniqueUsers.forEach(async (user_id) => {
           await User.findOne({
@@ -297,7 +295,15 @@ router.post(
           },
         }).then(async (user) => {
           if (user && team) {
-            await team.addUsers(user, { through: { is_team_lead: 1 } });
+            await Team_User.update({
+                is_team_lead: 0,
+              },
+              {
+                where: { team_id: req.body.team_id },
+              }
+            ).then(async (res) => {
+              await team.addUsers(user, { through: { is_team_lead: 1 } });
+            });
           }
         });
 
