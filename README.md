@@ -34,6 +34,17 @@ FRONTEND_LINK=http://localhost:3000/
 "dialect": "mysql"
 ```
 
+
+## Setup .sequelizerc file inside the project root directory (interview/.sequelizerc) if this file does not exists
+
+const path = require('path');
+module.exports = {
+  config: path.resolve('src/config', 'database.js'),
+  'models-path': path.resolve('src/db', 'models'),
+  'seeders-path': path.resolve('src/db', 'seeders'),
+  'migrations-path': path.resolve('src/db', 'migrations'),
+};
+
 # Docker Compose Nodejs and MySQL
 
 ## Run the System
