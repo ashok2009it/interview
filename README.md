@@ -24,6 +24,7 @@ USING_DOCKER=1
 JWT_SECRET=test@Token
 FRONTEND_LINK=http://localhost:3000/
 
+```
 ## Setup config/database.json file inside project directory (interview)
 
 ```
@@ -32,10 +33,7 @@ FRONTEND_LINK=http://localhost:3000/
 "database": "interview",
 "host": "localhost",
 "dialect": "mysql"
-
-
-
-
+```
 ## Setup .sequelizerc file inside the project root directory (interview/.sequelizerc) if this file does not exists
 ```
 
@@ -48,7 +46,7 @@ module.exports = {
 };
 ```
 
-# Docker Compose Nodejs and MySQL
+## Docker Compose Nodejs and MySQL
 
 ## Run the System
 
